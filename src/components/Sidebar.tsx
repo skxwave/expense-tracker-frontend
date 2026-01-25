@@ -12,10 +12,37 @@ import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const theme = useTheme()
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const homeItems = [
+    { label: "Dashboard", icon: <SpaceDashboardOutlinedIcon /> },
+    { label: "Accounts", icon: <AccountBalanceWalletOutlinedIcon /> },
+    { label: "Goals", icon: <TrackChangesIcon /> },
+    { label: "Transactions", icon: <PaidOutlinedIcon /> },
+  ]
+  const accountItems = [
+    { label: "Profile", icon: <PersonOutlinedIcon /> },
+    { label: "Settings", icon: <SettingsOutlinedIcon /> },
+    { label: "Logout", icon: <LogoutOutlinedIcon /> },
+  ]
+
+  // Derive active item from current URL path
+  const getActiveItem = () => {
+    const path = location.pathname.slice(1); // Remove leading slash
+    if (!path || path === '' || path === '/') return 'Dashboard';
+    return path.charAt(0).toUpperCase() + path.slice(1);
+  };
+
+  const onItemClick = (label: string) => {
+    navigate(`/${label.toLowerCase()}`);
+  }
+
+  const activeItem = getActiveItem();
+
   return (
     <Paper
       elevation={0}
@@ -29,10 +56,11 @@ const Sidebar = () => {
         top: 0,
         borderRadius: 0,
         borderRight: `1px solid ${theme.palette.divider}`,
+        display: { xs: 'none', md: 'block' },
       }}
     >
       <Box pb={4}>
-        <Typography 
+        <Typography
           variant="h5"
           sx={{
             fontWeight: 800,
@@ -50,33 +78,18 @@ const Sidebar = () => {
           Home
         </Typography>
 
-        <CustomButton isActive={true}>
-          <SpaceDashboardOutlinedIcon />
-          <Typography pl={1}>
-            Dashboard
-          </Typography>
-        </CustomButton>
-
-        <CustomButton>
-          <AccountBalanceWalletOutlinedIcon />
-          <Typography pl={1}>
-            Accounts
-          </Typography>
-        </CustomButton>
-
-        <CustomButton>
-          <TrackChangesIcon />
-          <Typography pl={1}>
-            Goals
-          </Typography>
-        </CustomButton>
-
-        <CustomButton>
-          <PaidOutlinedIcon />
-          <Typography pl={1}>
-            Transactions
-          </Typography>
-        </CustomButton>
+        {homeItems.map((item) => (
+          <CustomButton
+            key={item.label}
+            isActive={activeItem === item.label}
+            onClick={() => onItemClick(item.label)}
+          >
+            {item.icon}
+            <Typography pl={1}>
+              {item.label}
+            </Typography>
+          </CustomButton>
+        ))}
       </Box>
 
       <Box>
@@ -84,26 +97,18 @@ const Sidebar = () => {
           Account
         </Typography>
 
-        <CustomButton>
-          <PersonOutlinedIcon />
-          <Typography pl={1}>
-            Profile
-          </Typography>
-        </CustomButton>
-
-        <CustomButton>
-          <SettingsOutlinedIcon />
-          <Typography pl={1}>
-            Settings
-          </Typography>
-        </CustomButton>
-
-        <CustomButton>
-          <LogoutOutlinedIcon />
-          <Typography pl={1}>
-            Logout
-          </Typography>
-        </CustomButton>
+        {accountItems.map((item) => (
+          <CustomButton
+            key={item.label}
+            isActive={activeItem === item.label}
+            onClick={() => onItemClick(item.label)}
+          >
+            {item.icon}
+            <Typography pl={1}>
+              {item.label}
+            </Typography>
+          </CustomButton>
+        ))}
       </Box>
     </Paper>
   )

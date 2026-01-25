@@ -1,10 +1,10 @@
 import { Button, useTheme } from "@mui/material";
 
 const CustomButton = (
-  { children, isActive }: { children: React.ReactNode, isActive?: boolean },
+  { children, isActive, onClick }: { children: React.ReactNode, isActive?: boolean, onClick?: () => void },
 ) => {
   const theme = useTheme()
-  
+
   return (
     <Button
       sx={{
@@ -18,7 +18,7 @@ const CustomButton = (
         backgroundColor: isActive ? theme.palette.primary.main : 'transparent',
         color: isActive ? theme.palette.background.default : theme.palette.text.primary,
         '&:hover': {
-          backgroundColor: isActive ? theme.palette.primary.main : '#2e3d58',
+          backgroundColor: isActive ? theme.palette.primary.main : 'rgba(255, 255, 255, 0.08)',
         },
         '& .MuiSvgIcon-root': {
           color: isActive ? theme.palette.background.default : theme.palette.text.primary,
@@ -27,8 +27,9 @@ const CustomButton = (
           color: isActive ? theme.palette.background.default : theme.palette.text.primary,
         },
       }}
+      onClick={onClick}
     >
-      { children}
+      {children}
     </Button>
   )
 }
