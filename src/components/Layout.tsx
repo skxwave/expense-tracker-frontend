@@ -1,14 +1,17 @@
-import { Box } from '@mui/material'
-import Sidebar from './Sidebar'
-import Footer from './Footer'
-import Navbar from './Navbar'
+import { Box } from '@mui/material';
+
+import Sidebar from './Sidebar';
+import Footer from './Footer';
+import Navbar from './Navbar';
+import React, { useState } from 'react';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <Box sx={{ display: 'flex' }}>
-
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <Box
         component="main"
@@ -22,7 +25,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         }}
       >
         {/* Navbar */}
-        <Navbar />
+        <Navbar onMenuClick={() => setSidebarOpen(true)} />
 
         {/* Main content */}
         <Box sx={{ flexGrow: 1, p: 3 }}>
@@ -31,10 +34,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
         {/* Footer */}
         <Footer />
-
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

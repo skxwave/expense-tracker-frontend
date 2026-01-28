@@ -8,7 +8,7 @@ export const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#7C8FAC',
+      main: '#6C8EF2',
     },
     secondary: {
       main: '#EEEEEE',
@@ -19,6 +19,7 @@ export const theme = createTheme({
     },
     text: {
       primary: '#7C8FAC',
+      secondary: '#FFFFFF',
     },
     divider: '#6a768634',
   },
@@ -34,6 +35,48 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: '#7C8FAC',
+          fontWeight: 400,
+        },
+      },
+    },
+  },
+})
+
+export const lightTheme = createTheme({
+  typography: {
+    fontFamily: '"Plus Jakarta Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeightRegular: 200,
+  },
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#6C8EF2'
+    },
+    secondary: {
+      main: '#f50057', // pink
+    },
+    background: {
+      default: '#ffffff',
+      paper: '#f5f5f5',
+    },
+    text: {
+      primary: '#222222',
+      secondary: '#FFFFFF',
+    },
+    divider: '#e0e0e0',
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: '#222222',
           fontWeight: 400,
         },
       },

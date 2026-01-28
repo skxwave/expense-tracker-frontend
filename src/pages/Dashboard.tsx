@@ -4,10 +4,10 @@ import RevenueChart from '@/components/RevenueChart';
 const Dashboard = () => {
   const theme = useTheme();
   const statsData = [
-    { title: 'Total Balance', value: '$123,123,345', color: '#4caf50' },
-    { title: 'Income', value: '$8,500', color: '#2196f3' },
-    { title: 'Expenses', value: '$3,245', color: '#f44336' },
-    { title: 'Savings', value: '$9,100', color: '#ff9800' },
+    { title: 'Total Balance', value: '$123,123,345',},
+    { title: 'Income', value: '$8,500',},
+    { title: 'Expenses', value: '$3,245',},
+    { title: 'Savings', value: '$9,100',},
   ];
 
   return (
@@ -30,7 +30,6 @@ const Dashboard = () => {
               sx={{
                 p: 3,
                 height: '100%',
-                borderLeft: `4px solid ${stat.color}`,
                 border: `1px solid ${theme.palette.divider}`,
                 borderRadius: 2,
                 transition: 'transform 0.2s',
@@ -40,7 +39,7 @@ const Dashboard = () => {
                 },
               }}
             >
-              <Typography variant="body2" color="text.secondary" gutterBottom>
+              <Typography variant="body2" gutterBottom>
                 {stat.title}
               </Typography>
               <Typography 

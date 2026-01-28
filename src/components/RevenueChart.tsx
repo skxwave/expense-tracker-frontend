@@ -1,84 +1,24 @@
-import { Box, Paper, Typography, MenuItem, Select, useTheme } from '@mui/material';
-import Chart from 'react-apexcharts';
-import { type ApexOptions } from 'apexcharts';
+import { Box, Paper, Typography, MenuItem, useTheme, Grid } from '@mui/material';
+import { BarChart } from '@mui/x-charts/BarChart';
+import SelectInput from './SelectInput';
+import CustomButton from './Button';
 
 const RevenueChart = () => {
   const theme = useTheme();
-  
-  const chartOptions: ApexOptions = {
-    chart: {
-      type: 'bar',
-      height: 300,
-      toolbar: {
-        show: false,
-      },
-      background: 'transparent',
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: '50%',
-        borderRadius: 4,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: false,
-    },
-    xaxis: {
-      categories: ['16/08', '17/08', '18/08', '19/08', '20/08', '21/08', '22/08'],
-      labels: {
-        style: {
-          colors: '#8B98B0',
-          fontSize: '12px',
-        },
-      },
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
-        show: false,
-      },
-    },
-    yaxis: {
-      labels: {
-        style: {
-          colors: '#8B98B0',
-          fontSize: '12px',
-        },
-      },
-      tickAmount: 4,
-    },
-    grid: {
-      borderColor: '#3A4557',
-      strokeDashArray: 0,
-      xaxis: {
-        lines: {
-          show: false,
-        },
-      },
-    },
-    legend: {
-      show: false,
-    },
-    colors: ['#6C8EF2', '#4A5F7F'],
-    tooltip: {
-      theme: 'dark',
-    },
-  };
 
-  const chartSeries = [
-    {
-      name: 'Profit',
-      data: [2.0, 3.0, 2.5, 4.2, 2.8, 3.2, 0],
-    },
-    {
-      name: 'Loss',
-      data: [-1.5, -1.8, -2.5, -1.2, -1.8, -1.5, 0],
-    },
-  ];
+  const dataset = [
+    [354, 520, '1st'],
+    [0, 512, '2nd'],
+    [252, 225, '3rd'],
+    [522, 402, '4th'],
+    [0, 242, '5th'],
+    [0, 1020, '6th'],
+    [0, 300, '7th'],
+  ].map(([incomes, expenses, order]) => ({
+    incomes,
+    expenses,
+    order,
+  }));
 
   return (
     <Paper
@@ -92,67 +32,48 @@ const RevenueChart = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
         <Box>
           <Typography variant="h6" fontWeight="bold" gutterBottom>
-            Revenue Updates
+            Your money overview
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Overview of Profit
+          <Typography variant="body2">
+            Revenue and expenses over the period
           </Typography>
         </Box>
-        <Select
-          defaultValue="March 2025"
-          size="small"
-          sx={{
-            minWidth: 150,
-            backgroundColor: '#2C3E50',
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#4A5F7F',
-            },
-          }}
-        >
+        <SelectInput defaultValue="March 2025">
           <MenuItem value="March 2025">March 2025</MenuItem>
           <MenuItem value="February 2025">February 2025</MenuItem>
           <MenuItem value="January 2025">January 2025</MenuItem>
-        </Select>
+        </SelectInput>
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, gap: 4 }}>
-        <Box sx={{ flex: 1, height: 300, minHeight: { xs: 250, md: 300 } }}>
-          <Chart options={chartOptions} series={chartSeries} type="bar" height="100%" />
+        <Box sx={{ width: '100%', height: 300, minHeight: { xs: 250, md: 300 }}}>
+          <BarChart
+            series={[
+              { dataKey: 'incomes', label: 'Incomes', layout: 'vertical', stack: 'stack' },
+              { dataKey: 'expenses', label: 'Expenses', layout: 'vertical', stack: 'stack' },
+            ]}
+            dataset={dataset}
+            margin={{ left: 0 }}
+            borderRadius={10}
+            colors={['#818CF8', '#FFB74D']}
+          />
         </Box>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, minWidth: { xs: 'auto', lg: 200 } }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Box
-              sx={{
-                width: 32,
-                height: 32,
-                borderRadius: 1,
-                backgroundColor: '#6C8EF2',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Box
-                sx={{
-                  width: 12,
-                  height: 12,
-                  backgroundColor: '#fff',
-                  borderRadius: '50%',
-                }}
-              />
+        <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+          <Grid size={{ lg: 12, xs: 12, md: 4,  sm: 4 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Box>
+                <Typography variant="h4" fontWeight="bold">
+                  $63,489.50
+                </Typography>
+                <Typography variant="body2">
+                  Total Earnings
+                </Typography>
+              </Box>
             </Box>
-            <Box>
-              <Typography variant="h4" fontWeight="bold">
-                $63,489.50
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Total Earnings
-              </Typography>
-            </Box>
-          </Box>
+          </Grid>
 
-          <Box>
+          <Grid size={{ lg: 12,xs: 12, md: 4,  sm: 4 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
               <Box
                 sx={{
@@ -162,16 +83,16 @@ const RevenueChart = () => {
                   backgroundColor: '#6C8EF2',
                 }}
               />
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2">
                 Earnings this month
               </Typography>
             </Box>
             <Typography variant="h5" fontWeight="bold">
               $48,820
             </Typography>
-          </Box>
+          </Grid>
 
-          <Box>
+          <Grid size={{ lg: 12, xs: 12, md: 4,  sm: 4 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
               <Box
                 sx={{
@@ -181,36 +102,23 @@ const RevenueChart = () => {
                   backgroundColor: '#4A5F7F',
                 }}
               />
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2">
                 Expense this month
               </Typography>
             </Box>
             <Typography variant="h5" fontWeight="bold">
               $26,498
             </Typography>
-          </Box>
+          </Grid>
 
-          <Box
-            component="button"
-            sx={{
-              mt: 2,
-              py: 1.5,
-              px: 3,
-              backgroundColor: '#6C8EF2',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 2,
-              cursor: 'pointer',
-              fontWeight: 600,
-              fontSize: '0.9rem',
-              '&:hover': {
-                backgroundColor: '#5A7DE0',
-              },
-            }}
-          >
-            View Full Report
-          </Box>
-        </Box>
+          <Grid size={{ lg: 12, xs: 12, md: 12, sm: 12 }}>
+            <CustomButton isCentral isActive>
+              <Typography>
+                View Full Report
+              </Typography>
+            </CustomButton>
+          </Grid>
+        </Grid>
       </Box>
     </Paper>
   );

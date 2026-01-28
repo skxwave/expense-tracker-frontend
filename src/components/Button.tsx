@@ -1,7 +1,7 @@
 import { Button, useTheme } from "@mui/material";
 
 const CustomButton = (
-  { children, isActive, onClick }: { children: React.ReactNode, isActive?: boolean, onClick?: () => void },
+  { children, isActive, isCentral, onClick }: { children: React.ReactNode, isActive?: boolean, isCentral?: boolean, onClick?: () => void },
 ) => {
   const theme = useTheme()
 
@@ -9,22 +9,22 @@ const CustomButton = (
     <Button
       sx={{
         width: '100%',
-        alignContent: 'flex-start',
-        justifyContent: 'flex-start',
+        alignContent: isCentral ? 'center' : 'flex-start',
+        justifyContent: isCentral ? 'center' : 'flex-start',
         textTransform: 'none',
         py: 2,
         px: 2,
         borderRadius: 2,
         backgroundColor: isActive ? theme.palette.primary.main : 'transparent',
-        color: isActive ? theme.palette.background.default : theme.palette.text.primary,
+        color: isActive ? theme.palette.text.secondary : theme.palette.text.primary,
         '&:hover': {
           backgroundColor: isActive ? theme.palette.primary.main : 'rgba(255, 255, 255, 0.08)',
         },
         '& .MuiSvgIcon-root': {
-          color: isActive ? theme.palette.background.default : theme.palette.text.primary,
+          color: isActive ? theme.palette.text.secondary : theme.palette.text.primary,
         },
         '& .MuiTypography-root': {
-          color: isActive ? theme.palette.background.default : theme.palette.text.primary,
+          color: isActive ? theme.palette.text.secondary : theme.palette.text.primary,
         },
       }}
       onClick={onClick}

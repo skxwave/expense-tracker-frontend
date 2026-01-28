@@ -3,6 +3,7 @@ import {
   Typography,
   Box,
   useTheme,
+  Drawer,
 } from "@mui/material";
 import CustomButton from '@/components/Button';
 import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
@@ -14,8 +15,13 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import { useNavigate, useLocation } from "react-router-dom";
 
-const Sidebar = () => {
-  const theme = useTheme()
+interface SidebarProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const homeItems = [
@@ -23,12 +29,12 @@ const Sidebar = () => {
     { label: "Accounts", icon: <AccountBalanceWalletOutlinedIcon /> },
     { label: "Goals", icon: <TrackChangesIcon /> },
     { label: "Transactions", icon: <PaidOutlinedIcon /> },
-  ]
+  ];
   const accountItems = [
     { label: "Profile", icon: <PersonOutlinedIcon /> },
     { label: "Settings", icon: <SettingsOutlinedIcon /> },
     { label: "Logout", icon: <LogoutOutlinedIcon /> },
-  ]
+  ];
 
   // Derive active item from current URL path
   const getActiveItem = () => {
@@ -39,24 +45,26 @@ const Sidebar = () => {
 
   const onItemClick = (label: string) => {
     navigate(`/${label.toLowerCase()}`);
-  }
+    onClose(); // close sidebar on mobile after navigation
+  };
 
   const activeItem = getActiveItem();
 
-  return (
-    <Paper
-      elevation={0}
+  // Sidebar content
+  const sidebarContent = (
+    <Box
       sx={{
         px: 3,
         pt: 4,
         width: 260,
         height: '100vh',
+        borderRadius: 0,
+        borderRight: `1px solid ${theme.palette.divider}`,
+        bgcolor: 'background.paper',
+        display: { md: 'block' },
         position: 'fixed',
         left: 0,
         top: 0,
-        borderRadius: 0,
-        borderRight: `1px solid ${theme.palette.divider}`,
-        display: { xs: 'none', md: 'block' },
       }}
     >
       <Box pb={4}>
@@ -66,7 +74,7 @@ const Sidebar = () => {
             fontWeight: 800,
             background: 'linear-gradient(120deg, #6a82a5 0%, #8ab5f1 100%)',
             WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
+            WebkitTextFillColor: 'transparent',
           }}
         >
           Expense Tracker
@@ -85,9 +93,7 @@ const Sidebar = () => {
             onClick={() => onItemClick(item.label)}
           >
             {item.icon}
-            <Typography pl={1}>
-              {item.label}
-            </Typography>
+            <Typography pl={1}>{item.label}</Typography>
           </CustomButton>
         ))}
       </Box>
@@ -104,14 +110,57 @@ const Sidebar = () => {
             onClick={() => onItemClick(item.label)}
           >
             {item.icon}
-            <Typography pl={1}>
-              {item.label}
-            </Typography>
+            <Typography pl={1}>{item.label}</Typography>
           </CustomButton>
         ))}
       </Box>
-    </Paper>
-  )
-}
+    </Box>
+  );
 
-export default Sidebar
+  return (
+    <>
+      {/* Desktop sidebar */}
+      <Box
+        sx={{
+          display: { xs: 'none', md: 'block' },
+        }}
+      >
+        <Paper
+          elevation={0}
+          sx={{
+            px: 3,
+            pt: 4,
+            width: 260,
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            borderRadius: 0,
+            borderRight: `1px solid ${theme.palette.divider}`,
+            display: { xs: 'none', md: 'block' },
+          }}
+        >
+          {sidebarContent}
+        </Paper>
+      </Box>
+      {/* Mobile sidebar as Drawer */}
+      <Drawer
+        anchor="left"
+        open={open}
+        onClose={onClose}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: 260,
+          },
+        }}
+      >
+        {sidebarContent}
+      </Drawer>
+    </>
+  );
+};
+
+export default Sidebar;

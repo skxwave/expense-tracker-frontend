@@ -5,14 +5,22 @@ import {
   IconButton,
   Badge,
   Avatar,
-  useTheme
+  useTheme,
 } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
+import { useColorMode } from '@/context/ThemeContext';
 
-const Navbar = () => {
+interface NavbarProps {
+  onMenuClick?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
   const theme = useTheme();
+  const { mode, toggleTheme } = useColorMode();
 
   return (
     <AppBar
@@ -24,10 +32,21 @@ const Navbar = () => {
       }}
     >
       <Toolbar>
+        {/* Hamburger menu for mobile */}
+        <Box sx={{ display: { xs: 'block', md: 'none' }, mr: 2 }}>
+          <IconButton onClick={onMenuClick} sx={{ color: theme.palette.text.primary }}>
+            <MenuIcon />
+          </IconButton>
+        </Box>
+
         <Box sx={{ flexGrow: 1 }} />
 
         {/* Right side elements */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <IconButton onClick={toggleTheme} color="inherit">
+            {mode === 'dark' ? <Brightness7 /> : <Brightness4 sx={{ color: theme.palette.text.primary }} />}
+          </IconButton>
+          
           <IconButton sx={{ color: theme.palette.text.primary }}>
             <SearchIcon />
           </IconButton>
