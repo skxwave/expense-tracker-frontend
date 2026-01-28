@@ -70,9 +70,8 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
                 height: 36,
                 bgcolor: theme.palette.primary.main,
               }}
-            >
-              U
-            </Avatar>
+              src="./logo.png"
+            />
           </IconButton>
         </Box>
       </Toolbar>
