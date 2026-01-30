@@ -1,5 +1,8 @@
 import { Box, Grid, Paper, Typography, useTheme } from '@mui/material';
 import RevenueChart from '@/components/RevenueChart';
+import PaymentGateways from '@/components/PaymentGatewaysTab';
+import RecentTransactions from '@/components/RecentTransactionsTab';
+import GoalsTab from '@/components/GoalsTab';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -59,6 +62,27 @@ const Dashboard = () => {
         {/* Revenue Chart */}
         <Grid size={{ xs: 12 }}>
           <RevenueChart />
+        </Grid>
+
+        <Grid
+          container
+          spacing={2}
+          size={{ xs: 12 }}
+        >
+          {/* Payment Gateways */}
+          <Grid size={{ xs: 12, sm: 12, lg: 4 }}>
+            <PaymentGateways />
+          </Grid>
+
+          {/* Recent Transactions */}
+          <Grid size={{ xs: 12, sm: 12, lg: 4 }}>
+            <RecentTransactions />
+          </Grid>
+
+          <Grid size={{ xs: 12, sm: 12, lg: 4 }}>
+            <GoalsTab />
+          </Grid>
+
         </Grid>
       </Grid>
     </Box>

@@ -1,7 +1,7 @@
 import { Button, useTheme } from "@mui/material";
 
 const CustomButton = (
-  { children, isActive, isCentral, onClick }: { children: React.ReactNode, isActive?: boolean, isCentral?: boolean, onClick?: () => void },
+  { children, isActive, isCentral, onClick, sx }: { children: React.ReactNode, isActive?: boolean, isCentral?: boolean, onClick?: () => void, sx?: object },
 ) => {
   const theme = useTheme()
 
@@ -26,6 +26,7 @@ const CustomButton = (
         '& .MuiTypography-root': {
           color: isActive ? theme.palette.text.secondary : theme.palette.text.primary,
         },
+        ...sx,
       }}
       onClick={onClick}
     >
