@@ -11,8 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
-import { useColorMode } from '@/context/ThemeContext';
+import ThemeSwitcher from "@/components/base/ThemeSwitcher";
 
 interface NavbarProps {
   onMenuClick?: () => void;
@@ -20,7 +19,6 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
   const theme = useTheme();
-  const { mode, toggleTheme } = useColorMode();
 
   return (
     <AppBar
@@ -43,9 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
 
         {/* Right side elements */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <IconButton onClick={toggleTheme} color="inherit">
-            {mode === 'dark' ? <Brightness7 /> : <Brightness4 sx={{ color: theme.palette.text.primary }} />}
-          </IconButton>
+          <ThemeSwitcher />
           
           <IconButton sx={{ color: theme.palette.text.primary }}>
             <SearchIcon />

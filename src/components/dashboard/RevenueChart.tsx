@@ -1,7 +1,7 @@
 import { Box, Paper, Typography, MenuItem, useTheme, Grid } from '@mui/material';
 import { BarChart } from '@mui/x-charts/BarChart';
-import SelectInput from './SelectInput';
-import CustomButton from './Button';
+import SelectInput from '../base/SelectInput';
+import CustomButton from '../base/Button';
 
 const RevenueChart = () => {
   const theme = useTheme();

@@ -11,7 +11,7 @@ const Footer = () => {
         borderTop: '1px solid rgba(124, 143, 172, 0.2)',
       }}
     >
-      Footer placeholder
+      skxwave © {new Date().getFullYear()}
     </Box>
   );
 };

@@ -5,7 +5,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import CustomButton from './Button';
+import CustomButton from '../base/Button';
 
 const RecentTransactions = () => {
   const theme = useTheme();

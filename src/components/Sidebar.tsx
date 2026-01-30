@@ -5,7 +5,7 @@ import {
   useTheme,
   Drawer,
 } from "@mui/material";
-import CustomButton from '@/components/Button';
+import CustomButton from '@/components/base/Button';
 import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';

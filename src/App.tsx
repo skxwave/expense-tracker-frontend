@@ -1,15 +1,17 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from '@/components/Layout'
 import Dashboard from './pages/Dashboard'
+import Login from './pages/Login'
 
 function App() {
   return (
-    <Layout>
-      <Routes>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route element={<Layout />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Layout>
+      </Route>
+    </Routes>
   )
 }
 

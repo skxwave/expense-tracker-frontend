@@ -1,8 +1,8 @@
 import { Box, Grid, Paper, Typography, useTheme } from '@mui/material';
-import RevenueChart from '@/components/RevenueChart';
-import PaymentGateways from '@/components/PaymentGatewaysTab';
-import RecentTransactions from '@/components/RecentTransactionsTab';
-import GoalsTab from '@/components/GoalsTab';
+import RevenueChart from '@/components/dashboard/RevenueChart';
+import PaymentGateways from '@/components/dashboard/PaymentGatewaysTab';
+import RecentTransactions from '@/components/dashboard/RecentTransactionsTab';
+import GoalsTab from '@/components/dashboard/GoalsTab';
 
 const Dashboard = () => {
   const theme = useTheme();

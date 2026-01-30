@@ -1,11 +1,12 @@
 import { Box } from '@mui/material';
+import { Outlet } from 'react-router-dom';
 
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import Navbar from './Navbar';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -29,7 +30,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
         {/* Main content */}
         <Box sx={{ flexGrow: 1, p: 3 }}>
-          {children}
+          <Outlet />
         </Box>
 
         {/* Footer */}

@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 import { ImPaypal } from "react-icons/im";
 import { TbBrandStripeFilled } from "react-icons/tb";
-import CustomButton from './Button';
+import CustomButton from '../base/Button';
 
 const PaymentGateways = () => {
   const theme = useTheme();

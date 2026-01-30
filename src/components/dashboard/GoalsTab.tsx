@@ -6,7 +6,7 @@ import {
   LinearProgress,
 } from '@mui/material';
 import { GoGoal } from "react-icons/go";
-import CustomButton from './Button';
+import CustomButton from '../base/Button';
 
 const GoalsTab = () => {
   const theme = useTheme();
