@@ -25,15 +25,15 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const homeItems = [
-    { label: "Dashboard", icon: <SpaceDashboardOutlinedIcon /> },
-    { label: "Accounts", icon: <AccountBalanceWalletOutlinedIcon /> },
-    { label: "Goals", icon: <TrackChangesIcon /> },
-    { label: "Transactions", icon: <PaidOutlinedIcon /> },
+    { label: "Dashboard", link: "/", icon: <SpaceDashboardOutlinedIcon /> },
+    { label: "Accounts", link: "/accounts", icon: <AccountBalanceWalletOutlinedIcon /> },
+    { label: "Goals", link: "/goals", icon: <TrackChangesIcon /> },
+    { label: "Transactions", link: "/transactions", icon: <PaidOutlinedIcon /> },
   ];
   const accountItems = [
-    { label: "Profile", icon: <PersonOutlinedIcon /> },
-    { label: "Settings", icon: <SettingsOutlinedIcon /> },
-    { label: "Logout", icon: <LogoutOutlinedIcon /> },
+    { label: "Profile", link: "/profile", icon: <PersonOutlinedIcon /> },
+    { label: "Settings", link: "/settings", icon: <SettingsOutlinedIcon /> },
+    { label: "Logout", link: "/login", icon: <LogoutOutlinedIcon /> },
   ];
 
   // Derive active item from current URL path
@@ -43,8 +43,8 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
     return path.charAt(0).toUpperCase() + path.slice(1);
   };
 
-  const onItemClick = (label: string) => {
-    navigate(`/${label.toLowerCase()}`);
+  const onItemClick = (link: string) => {
+    navigate(link);
     onClose(); // close sidebar on mobile after navigation
   };
 
@@ -90,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
           <CustomButton
             key={item.label}
             isActive={activeItem === item.label}
-            onClick={() => onItemClick(item.label)}
+            onClick={() => onItemClick(item.link)}
           >
             {item.icon}
             <Typography pl={1}>{item.label}</Typography>
@@ -107,7 +107,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
           <CustomButton
             key={item.label}
             isActive={activeItem === item.label}
-            onClick={() => onItemClick(item.label)}
+            onClick={() => onItemClick(item.link)}
           >
             {item.icon}
             <Typography pl={1}>{item.label}</Typography>
