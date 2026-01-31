@@ -14,6 +14,8 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAppDispatch } from "@/redux/store";
+import { logout } from "@/redux/slices/authSlice";
 
 interface SidebarProps {
   open: boolean;
@@ -33,8 +35,14 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   const accountItems = [
     { label: "Profile", link: "/profile", icon: <PersonOutlinedIcon /> },
     { label: "Settings", link: "/settings", icon: <SettingsOutlinedIcon /> },
-    { label: "Logout", link: "/login", icon: <LogoutOutlinedIcon /> },
   ];
+  const dispatch = useAppDispatch();
+
+  // Logout handler
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login', { replace: true });
+  };
 
   // Derive active item from current URL path
   const getActiveItem = () => {
@@ -113,6 +121,12 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
             <Typography pl={1}>{item.label}</Typography>
           </CustomButton>
         ))}
+        <CustomButton
+          onClick={handleLogout}
+        >
+          <LogoutOutlinedIcon />
+          <Typography pl={1}>Logout</Typography>
+        </CustomButton>
       </Box>
     </Box>
   );

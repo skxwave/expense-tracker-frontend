@@ -2,16 +2,20 @@ import { TextField, useTheme } from '@mui/material';
 
 const InputField = ({
   label,
+  value,
   type = 'text',
   autoComplete,
   variant = 'outlined',
   sx,
+  onChange,
 }: {
   label: string;
+  value?: string;
   type?: 'text' | 'password' | 'email';
   autoComplete?: string;
   variant?: 'outlined' | 'filled' | 'standard';
   sx?: object;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const theme = useTheme();
 
@@ -23,6 +27,7 @@ const InputField = ({
       fullWidth
       margin="normal"
       autoComplete={autoComplete}
+      value={value}
       sx={{
         '& .MuiOutlinedInput-root': {
           borderRadius: 3,
@@ -42,6 +47,7 @@ const InputField = ({
         },
         ...sx,
       }}
+      onChange={onChange}
     />
   )
 }

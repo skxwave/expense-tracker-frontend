@@ -21,6 +21,9 @@ export const theme = createTheme({
       primary: '#7C8FAC',
       secondary: '#FFFFFF',
     },
+    error: {
+      main: '#f44336',
+    },
     divider: '#6a768634',
   },
   components: {

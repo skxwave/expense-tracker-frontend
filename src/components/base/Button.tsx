@@ -1,7 +1,20 @@
 import { Button, useTheme } from "@mui/material";
 
-const CustomButton = (
-  { children, isActive, isCentral, onClick, sx }: { children: React.ReactNode, isActive?: boolean, isCentral?: boolean, onClick?: () => void, sx?: object },
+const CustomButton = ({
+  children,
+  isActive,
+  isCentral,
+  onClick,
+  sx,
+  type
+}: {
+  children: React.ReactNode,
+  isActive?: boolean,
+  isCentral?: boolean,
+  onClick?: () => void,
+  sx?: object,
+  type?: "button" | "submit" | "reset"
+},
 ) => {
   const theme = useTheme()
 
@@ -29,6 +42,7 @@ const CustomButton = (
         ...sx,
       }}
       onClick={onClick}
+      type={type}
     >
       {children}
     </Button>
