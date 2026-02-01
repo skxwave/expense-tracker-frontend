@@ -1,55 +1,45 @@
-import { TextField, useTheme } from '@mui/material';
+import { TextField, useTheme, type TextFieldProps } from '@mui/material';
+import { forwardRef } from 'react';
 
-const InputField = ({
-  label,
-  value,
-  type = 'text',
-  autoComplete,
-  variant = 'outlined',
-  sx,
-  onChange,
-}: {
-  label: string;
-  value?: string;
-  type?: 'text' | 'password' | 'email';
-  autoComplete?: string;
-  variant?: 'outlined' | 'filled' | 'standard';
-  sx?: object;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
-  const theme = useTheme();
+const InputField = forwardRef<HTMLDivElement, TextFieldProps>(
+  ({ label, type = 'text', variant = 'outlined', sx, error, helperText, ...props }, ref) => {
+    const theme = useTheme();
 
-  return (
-    <TextField
-      label={label}
-      type={type}
-      variant={variant}
-      fullWidth
-      margin="normal"
-      autoComplete={autoComplete}
-      value={value}
-      sx={{
-        '& .MuiOutlinedInput-root': {
-          borderRadius: 3,
-          color: theme.palette.text.primary,
-          '& fieldset': {
-            borderColor: theme.palette.text.primary,
+    return (
+      <TextField
+        {...props}
+        ref={ref}
+        label={label}
+        type={type}
+        variant={variant}
+        error={error}
+        helperText={helperText}
+        fullWidth
+        margin="normal"
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            borderRadius: 3,
+            color: theme.palette.text.primary,
+            '& fieldset': {
+              borderColor: error ? undefined : theme.palette.text.primary,
+            },
+            '&:hover fieldset': {
+              borderColor: error ? undefined : theme.palette.text.primary,
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: error ? undefined : theme.palette.text.primary,
+            },
           },
-          '&:hover fieldset': {
-            borderColor: theme.palette.text.primary,
+          '& .MuiInputLabel-root': {
+            color: error ? undefined : theme.palette.text.primary,
           },
-          '&.Mui-focused fieldset': {
-            borderColor: theme.palette.text.primary,
-          },
-        },
-        '& .MuiInputLabel-root': {
-          color: theme.palette.text.primary,
-        },
-        ...sx,
-      }}
-      onChange={onChange}
-    />
-  )
-}
+          ...sx,
+        }}
+      />
+    );
+  }
+);
+
+InputField.displayName = 'InputField';
 
 export default InputField;

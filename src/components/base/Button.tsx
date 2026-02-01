@@ -6,7 +6,8 @@ const CustomButton = ({
   isCentral,
   onClick,
   sx,
-  type
+  type,
+  disabled,
 }: {
   children: React.ReactNode,
   isActive?: boolean,
@@ -14,6 +15,7 @@ const CustomButton = ({
   onClick?: () => void,
   sx?: object,
   type?: "button" | "submit" | "reset"
+  disabled?: boolean,
 },
 ) => {
   const theme = useTheme()
@@ -43,6 +45,7 @@ const CustomButton = ({
       }}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       {children}
     </Button>

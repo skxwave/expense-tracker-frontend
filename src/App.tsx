@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import Login from '@/pages/Login'
+import AuthForm from '@/pages/AuthForm'
 import Layout from '@/components/Layout'
 import Dashboard from '@/pages/Dashboard'
 import Accounts from '@/pages/Accounts'
@@ -14,7 +14,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute'
 function App() {
   return (
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<AuthForm />} />
 
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
