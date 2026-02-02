@@ -8,7 +8,7 @@ import {
   Stack,
   useTheme,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from "react-icons/fa";
 
@@ -16,10 +16,19 @@ import ThemeSwitcher from "@/components/base/ThemeSwitcher";
 
 import LoginForm from '@/components/auth/LoginForm';
 import RegisterForm from '@/components/auth/RegisterForm';
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm = () => {
   const theme = useTheme();
   const [isRegister, setIsRegister] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <Box
