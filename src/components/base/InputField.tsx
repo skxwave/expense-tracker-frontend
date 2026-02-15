@@ -15,7 +15,6 @@ const InputField = forwardRef<HTMLDivElement, TextFieldProps>(
         error={error}
         helperText={helperText}
         fullWidth
-        margin="normal"
         sx={{
           '& .MuiOutlinedInput-root': {
             borderRadius: 3,

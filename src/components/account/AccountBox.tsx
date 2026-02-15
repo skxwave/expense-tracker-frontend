@@ -1,8 +1,19 @@
-import { Box, Paper, Typography, useTheme } from '@mui/material';
-import { ImPaypal } from "react-icons/im";
+import { Box, Paper, Typography, useTheme, Divider } from '@mui/material';
+import { type ReactNode } from 'react';
+import CustomButton from '../base/Button';
+import { useNavigate } from 'react-router-dom';
 
-const AccountBox = () => {
+interface AccountBoxProps {
+  accountId: number;
+  name: string;
+  value: string | number;
+  icon: ReactNode;
+  transactions?: string[];
+}
+
+const AccountBox = ({ accountId, name, value, icon }: AccountBoxProps) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Paper
@@ -12,11 +23,7 @@ const AccountBox = () => {
         height: '100%',
         border: `1px solid ${theme.palette.divider}`,
         borderRadius: 2,
-        transition: 'transform 0.2s',
         overflow: 'hidden',
-        '&:hover': {
-          transform: 'translateY(-4px)',
-        },
       }}
     >
       <Box
@@ -32,22 +39,45 @@ const AccountBox = () => {
           borderRadius: 2,
           '& svg': { display: 'block' }
         }}>
-          <ImPaypal size={24} />
+          {icon}
         </Box>
-        <Typography variant="h5" fontWeight="bold" gutterBottom>
-          Account
+        <Typography variant="h6" gutterBottom>
+          {name}
         </Typography>
       </Box>
-      <Typography 
-        variant="h5" 
-        fontWeight="bold"
-        sx={{
-          wordBreak: 'break-word',
-          overflowWrap: 'break-word',
-        }}
+
+      <Divider sx={{ my: 2 }} />
+
+
+      <Box
+        display="flex"
+        gap={2}
+        justifyContent="space-between"
+        mt={2}
       >
-        Value
-      </Typography>
+        <Typography 
+          variant="h5"
+          fontWeight="bold"
+          sx={{
+            wordBreak: 'break-word',
+            overflowWrap: 'break-word',
+          }}
+        >
+          {value}
+        </Typography>
+        <CustomButton
+          isActive
+          isCentral
+          onClick={() => {navigate(`${accountId}`)}}
+          sx={{
+            py: 1,
+            width: { xs: '100%', sm: 'auto' },
+          }}>
+          <Typography>
+            View
+          </Typography>
+        </CustomButton>
+      </Box>
     </Paper>
   );
 };

@@ -44,19 +44,18 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
     navigate('/login', { replace: true });
   };
 
-  // Derive active item from current URL path
-  const getActiveItem = () => {
-    const path = location.pathname.slice(1); // Remove leading slash
-    if (!path || path === '' || path === '/') return 'Dashboard';
-    return path.charAt(0).toUpperCase() + path.slice(1);
+  // Check if a route is active based on pathname
+  const isRouteActive = (link: string) => {
+    if (link === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(link);
   };
 
   const onItemClick = (link: string) => {
     navigate(link);
     onClose(); // close sidebar on mobile after navigation
   };
-
-  const activeItem = getActiveItem();
 
   // Sidebar content
   const sidebarContent = (
@@ -97,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         {homeItems.map((item) => (
           <CustomButton
             key={item.label}
-            isActive={activeItem === item.label}
+            isActive={isRouteActive(item.link)}
             onClick={() => onItemClick(item.link)}
           >
             {item.icon}
@@ -114,7 +113,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         {accountItems.map((item) => (
           <CustomButton
             key={item.label}
-            isActive={activeItem === item.label}
+            isActive={isRouteActive(item.link)}
             onClick={() => onItemClick(item.link)}
           >
             {item.icon}

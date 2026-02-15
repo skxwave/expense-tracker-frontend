@@ -1,6 +1,6 @@
-import { Select, useTheme } from "@mui/material";
+import { Select, useTheme, type SxProps } from "@mui/material";
 
-const SelectInput = ({ children, defaultValue }: { children: React.ReactNode; defaultValue: string }) => {
+const SelectInput = ({ children, defaultValue, sx }: { children: React.ReactNode; defaultValue: string; sx?: SxProps }) => {
   const theme = useTheme();
 
   return (
@@ -9,9 +9,17 @@ const SelectInput = ({ children, defaultValue }: { children: React.ReactNode; de
       size="small"
       sx={{
         minWidth: 150,
+        borderRadius: 3,
         backgroundColor: `${theme.palette.background.paper}`,
+        ...sx,
         '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: theme.palette.divider,
+          borderColor: theme.palette.text.primary,
+        },
+        '&:hover .MuiOutlinedInput-notchedOutline': {
+          borderColor: theme.palette.text.primary,
+        },
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: theme.palette.text.primary,
         },
       }}
       MenuProps={{
