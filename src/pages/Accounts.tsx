@@ -70,19 +70,20 @@ const Accounts = () => {
           sx={{
             display: 'flex',
             gap: 2,
-            justifyContent: { xs: 'center', md: 'space-between', sm: 'space-between' },
+            justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
           }}
         >
-          <Typography variant='h6' ml={2}>
+          <Typography variant='h6' ml={1}>
             Your Accounts
           </Typography>
           <CustomButton
             isActive
             onClick={() => navigate('add-account')}
             sx={{
-              width: { xs: '100%', sm: 'auto' },
+              width: { sm: 'auto' },
+              mr: 1, 
             }}
           >
             <Typography>

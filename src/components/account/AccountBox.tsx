@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, useTheme, Divider } from '@mui/material';
+import { Box, Paper, Typography, useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 import CustomButton from '../base/Button';
 import { useNavigate } from 'react-router-dom';
@@ -46,9 +46,6 @@ const AccountBox = ({ accountId, name, value, icon }: AccountBoxProps) => {
         </Typography>
       </Box>
 
-      <Divider sx={{ my: 2 }} />
-
-
       <Box
         display="flex"
         gap={2}
@@ -71,7 +68,7 @@ const AccountBox = ({ accountId, name, value, icon }: AccountBoxProps) => {
           onClick={() => {navigate(`${accountId}`)}}
           sx={{
             py: 1,
-            width: { xs: '100%', sm: 'auto' },
+            width: 'auto',
           }}>
           <Typography>
             View
