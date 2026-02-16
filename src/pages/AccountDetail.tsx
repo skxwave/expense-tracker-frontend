@@ -2,6 +2,8 @@ import { Box, Paper, Typography, Grid, useTheme } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import CardUI from '@/components/account/CardUI';
 import { type AccountData } from '@/types/account';
+// import CustomButton from '@/components/base/Button';
+import RecentTransactions from '@/components/dashboard/RecentTransactionsTab';
 
 const AccountDetail = () => {
   const theme = useTheme();
@@ -31,7 +33,42 @@ const AccountDetail = () => {
         spacing={2}
       >
         <Grid size={{ xs: 12, sm: 12, md: 4 }}>
-          <CardUI accountData={accountData} />
+          <Grid>
+            <CardUI accountData={accountData} />
+          </Grid>
+          <Grid>
+            <RecentTransactions />
+
+            {/* <Paper
+              elevation={0}
+              sx={{
+                p: 3,
+                height: '100%',
+                border: `1px solid ${theme.palette.divider}`,
+                borderRadius: 2,
+                overflow: 'hidden',
+              }}
+            >
+
+              <Box display='flex' gap={2}>
+                <CustomButton isActive isCentral sx={{ p: 1 }}>
+                  <Typography>Edit</Typography>
+                </CustomButton>
+                <CustomButton
+                  isActive
+                  isCentral
+                  sx={{
+                    p: 1,
+                    backgroundColor: theme.palette.error.main,
+                    '&:hover': {
+                      backgroundColor: theme.palette.error.light,
+                    }
+                  }}>
+                  <Typography>Delete</Typography>
+                </CustomButton>
+              </Box>
+            </Paper> */}
+          </Grid>
         </Grid>
 
         {/* Account Information */}
@@ -47,14 +84,14 @@ const AccountDetail = () => {
               overflow: 'hidden',
             }}
           >
-            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1, color: 'text.secondary' }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>
               Account Type
             </Typography>
             <Typography variant="body1" sx={{ mb: 3 }}>
               {accountData.accountType}
             </Typography>
 
-            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1, color: 'text.secondary' }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>
               Description
             </Typography>
             <Typography variant="body2" sx={{ mb: 3 }}>
