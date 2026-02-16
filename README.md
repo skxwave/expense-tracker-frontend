@@ -1,73 +1,110 @@
-# React + TypeScript + Vite
+# 💰 Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, feature-rich expense tracking application built with React, TypeScript, and Material-UI. Track your finances, manage accounts, set goals, and visualize your spending habits.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 📊 Dashboard
+- **Revenue Charts** - Visual overview of your income and expenses
+- **Recent Transactions** - Quick view of latest transactions
+- **Payment Gateways** - Track payments across different platforms
+- **Goals Overview** - Monitor your financial goals at a glance
 
-## React Compiler
+### 💳 Accounts Management
+- Create and manage multiple accounts
+- View account details with balance information
+- Edit and delete accounts
+- Support for various account types (Digital Wallets, Bank Accounts, etc.)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🎯 Goals Tracking
+- Set financial goals with target amounts
+- Track progress with visual indicators
+- Monitor goal completion percentage
+- View detailed goal information
 
-## Expanding the ESLint configuration
+### 📈 Transactions
+- Record and categorize transactions
+- View transaction history
+- Track spending patterns
+- Detailed transaction analytics
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 👤 User Management
+- Secure authentication (Login/Register)
+- Protected routes with ProtectedRoute component
+- User profile management
+- Account settings
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🌓 Theme Support
+- Light and Dark mode toggle
+- Theme persistence
+- Material-UI theme integration
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Frontend Framework**: React 19 + TypeScript
+- **UI Library**: Material-UI (MUI) v7
+- **State Management**: Redux Toolkit
+- **Routing**: React Router v7
+- **Forms**: React Hook Form
+- **HTTP Client**: Axios
+- **Charts**: Chart.js, ApexCharts
+- **Build Tool**: Vite
+- **Styling**: Emotion (MUI styled)
+- **Icons**: React Icons
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── api/              # API calls (auth, axios config)
+├── components/       # Reusable UI components
+│   ├── account/     # Account-related components
+│   ├── auth/        # Authentication components
+│   ├── base/        # Base UI components (Button, Input, etc.)
+│   ├── dashboard/   # Dashboard components
+│   └── goals/       # Goals components
+├── pages/           # Route pages
+├── context/         # React context (if used)
+├── hooks/           # Custom hooks
+├── redux/           # Redux store and slices
+├── types/           # TypeScript type definitions
+├── utils/           # Utility functions
+└── assets/          # Static assets
+```
+
+## 🔐 Authentication
+
+The app includes protected routes that require authentication. Users must log in to access the dashboard and other features.
+
+## 📝 License
+
+<TODO>
+
+## 👨‍💻 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
