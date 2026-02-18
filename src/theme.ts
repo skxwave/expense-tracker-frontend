@@ -25,6 +25,10 @@ export const theme = createTheme({
       main: '#f44336',
     },
     divider: '#6a768634',
+    action: {
+      hover: '#313e57',
+      selected: '#313e57'
+    }
   },
   components: {
     MuiButton: {
@@ -67,6 +71,10 @@ export const lightTheme = createTheme({
       secondary: '#FFFFFF',
     },
     divider: '#e0e0e0',
+    action: {
+      hover: '#e2e2e2',
+      selected: '#e2e2e2'
+    }
   },
   components: {
     MuiButton: {

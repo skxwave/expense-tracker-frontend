@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Box, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Divider, Paper, Typography, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
 import CustomButton from '@/components/base/Button';
+import TransactionListItem from '@/components/transactions/TransactionListItem';
 
 const Transactions = () => {
   const theme = useTheme();
@@ -9,6 +11,13 @@ const Transactions = () => {
   const [activeTab, setActiveTab] = useState('All Transactions');
 
   const transactionTypes = ['All Transactions', 'Expenses', 'Incomes', 'Transfers'];
+
+  const transactions = [
+    { id: 1, icon: <LocalGroceryStoreOutlinedIcon />, category: 'Grocery', amount: 20 },
+    { id: 2, icon: <LocalGroceryStoreOutlinedIcon />, category: 'Grocery', amount: 20 },
+    { id: 3, icon: <LocalGroceryStoreOutlinedIcon />, category: 'Grocery', amount: 20 },
+    { id: 4, icon: <LocalGroceryStoreOutlinedIcon />, category: 'Grocery', amount: 20 },
+  ];
 
   return (
     <Box 
@@ -61,6 +70,7 @@ const Transactions = () => {
         sx={{
           display: 'flex',
           gap: 1,
+          mb: 2,
           justifyContent: 'flex-start',
           alignItems: 'center',
           flexWrap: 'wrap',
@@ -82,6 +92,29 @@ const Transactions = () => {
           </CustomButton>
         ))}
       </Box>
+
+      <Paper
+        elevation={0}
+        sx={{
+          // p: 2,
+          mb: 2,
+          height: '100%',
+          border: `1px solid ${theme.palette.divider}`,
+          borderRadius: 2,
+          overflow: 'hidden',
+        }}
+      >
+        {transactions.map((transaction, index) => (
+          <Box key={transaction.id}>
+            <TransactionListItem
+              icon={transaction.icon}
+              category={transaction.category}
+              amount={transaction.amount}
+            />
+            {index !== transactions.length - 1 && <Divider variant='middle' />}
+          </Box>
+        ))}
+      </Paper>
     </Box>
   );
 }
