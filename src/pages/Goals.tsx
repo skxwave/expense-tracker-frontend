@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, Paper, Grid, useTheme } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import CustomButton from '@/components/base/Button';
+import StyledPaper from '@/components/base/StyledPaper';
 import GoalBox from '@/components/goals/GoalBox';
 
 const Goals = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const goalsData = [
     {
@@ -60,16 +60,11 @@ const Goals = () => {
         mx: 'auto',
       }}
     >
-      <Paper
-        elevation={0}
-        sx={{
-          p: 2,
-          mb: 2,
-          height: '100%',
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: 2,
-          overflow: 'hidden',
-        }}
+      <StyledPaper
+        padding={2}
+        marginBottom={2}
+        fullHeight
+        withOverflow
       >
         <Box
           sx={{
@@ -80,7 +75,7 @@ const Goals = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography variant='h6' ml={1}>
+          <Typography ml={1}>
             Your Goals
           </Typography>
           <CustomButton
@@ -88,7 +83,7 @@ const Goals = () => {
             onClick={() => navigate('add-goal')}
             sx={{
               width: { sm: 'auto' },
-              mr: 1, 
+              py: 1, 
             }}
           >
             <Typography>
@@ -96,25 +91,20 @@ const Goals = () => {
             </Typography>
           </CustomButton>
         </Box>
-      </Paper>
+      </StyledPaper>
 
       <Grid 
         container
         spacing={2}
       >
         <Grid size={{ xs: 12, sm: 12, md: 12, lg: 4 }}>
-          <Paper
-            elevation={0}
-            sx={{
-              p: 2,
-              height: '100%',
-              border: `1px solid ${theme.palette.divider}`,
-              borderRadius: 2,
-              overflow: 'hidden',
-            }}
+          <StyledPaper
+            padding={2}
+            fullHeight
+            withOverflow
           >
-            <Typography variant='h6'>Goal Data & charts</Typography>
-          </Paper>
+            <Typography justifySelf='center'>Goal Data & charts</Typography>
+          </StyledPaper>
         </Grid>
 
         <Grid container spacing={2} size={{ xs: 12, sm: 12, md: 12, lg: 8 }}>

@@ -1,13 +1,12 @@
-import { Divider, Paper, Typography, useTheme, Box, IconButton } from '@mui/material';
+import { Divider, Typography, Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import StyledPaper from '../base/StyledPaper';
 
 interface TransactionDetailsProps {
   onClose?: () => void;
 }
 
 const TransactionDetails = ({ onClose }: TransactionDetailsProps) => {
-  const theme = useTheme();
-
   const details = [
     { label: 'Category', value: 'Grocery' },
     { label: 'Amount', value: '$20.00' },
@@ -18,15 +17,10 @@ const TransactionDetails = ({ onClose }: TransactionDetailsProps) => {
   ];
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: 2,
-        height: '100%',
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 2,
-        overflow: 'hidden',
-      }}
+    <StyledPaper
+      padding={2}
+      fullHeight
+      withOverflow
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
         <Typography justifySelf='center'>Transaction Details</Typography>
@@ -51,7 +45,7 @@ const TransactionDetails = ({ onClose }: TransactionDetailsProps) => {
           </Box>
         ))}
       </Box>
-    </Paper>
+    </StyledPaper>
   )
 };
 

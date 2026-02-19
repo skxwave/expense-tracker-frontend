@@ -1,5 +1,6 @@
-import { Box, Paper, Typography, LinearProgress, useTheme } from '@mui/material';
+import { Box, Typography, LinearProgress, useTheme } from '@mui/material';
 import CustomButton from '../base/Button';
+import StyledPaper from '../base/StyledPaper';
 import { useNavigate } from 'react-router-dom';
 import { GoGoal } from "react-icons/go";
 
@@ -16,15 +17,10 @@ const GoalBox = ({ goalId, name, currentValue, goalTarget }: GoalBoxProps) => {
   const goalProgress = currentValue * 100 / goalTarget;
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: 3,
-        height: '100%',
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 2,
-        overflow: 'hidden',
-      }}
+    <StyledPaper
+      padding={3}
+      fullHeight
+      withOverflow
     >
       <Box
         display='flex'
@@ -122,7 +118,7 @@ const GoalBox = ({ goalId, name, currentValue, goalTarget }: GoalBoxProps) => {
           </Typography>
         </CustomButton>
       </Box>
-    </Paper>
+    </StyledPaper>
   );
 };
 

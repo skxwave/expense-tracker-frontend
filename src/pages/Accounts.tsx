@@ -1,11 +1,11 @@
-import { Box, Grid, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { ImPaypal, ImCoinDollar, ImCreditCard } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
 import AccountBox from '@/components/account/AccountBox';
 import CustomButton from '@/components/base/Button';
+import StyledPaper from '@/components/base/StyledPaper';
 
 const Accounts = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const accountsData = [
     {
@@ -55,16 +55,11 @@ const Accounts = () => {
         mx: 'auto',
       }}
     >
-      <Paper
-        elevation={0}
-        sx={{
-          p: 2,
-          mb: 2,
-          height: '100%',
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: 2,
-          overflow: 'hidden',
-        }}
+      <StyledPaper
+        padding={2}
+        marginBottom={2}
+        fullHeight
+        withOverflow
       >
         <Box
           sx={{
@@ -75,7 +70,7 @@ const Accounts = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography variant='h6' ml={1}>
+          <Typography ml={1}>
             Your Accounts
           </Typography>
           <CustomButton
@@ -83,7 +78,7 @@ const Accounts = () => {
             onClick={() => navigate('add-account')}
             sx={{
               width: { sm: 'auto' },
-              mr: 1, 
+              py: 1,
             }}
           >
             <Typography>
@@ -91,7 +86,7 @@ const Accounts = () => {
             </Typography>
           </CustomButton>
         </Box>
-      </Paper>
+      </StyledPaper>
       <Grid 
         container
         spacing={2}

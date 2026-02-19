@@ -1,12 +1,12 @@
-import { Box, Paper, Typography, Grid, useTheme } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import CardUI from '@/components/account/CardUI';
 import { type AccountData } from '@/types/account';
+import StyledPaper from '@/components/base/StyledPaper';
 // import CustomButton from '@/components/base/Button';
 import RecentTransactions from '@/components/dashboard/RecentTransactionsTab';
 
 const AccountDetail = () => {
-  const theme = useTheme();
   const { id } = useParams();
 
   const accountData: AccountData = {
@@ -73,16 +73,11 @@ const AccountDetail = () => {
 
         {/* Account Information */}
         <Grid size={{ xs: 12, sm: 12, md: 8 }}>
-          <Paper
-            elevation={0}
-            sx={{
-              p: 3,
-              mb: 2,
-              height: '100%',
-              border: `1px solid ${theme.palette.divider}`,
-              borderRadius: 2,
-              overflow: 'hidden',
-            }}
+          <StyledPaper
+            padding={3}
+            marginBottom={2}
+            fullHeight
+            withOverflow
           >
             <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>
               Account Type
@@ -99,7 +94,7 @@ const AccountDetail = () => {
             </Typography>
 
             <Typography>Here will be transactions and other data</Typography>
-          </Paper>
+          </StyledPaper>
         </Grid>
       </Grid>
     </Box>

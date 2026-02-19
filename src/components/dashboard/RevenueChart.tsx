@@ -1,11 +1,10 @@
-import { Box, Paper, Typography, MenuItem, useTheme, Grid } from '@mui/material';
+import { Box, Typography, MenuItem, Grid } from '@mui/material';
 import { BarChart } from '@mui/x-charts/BarChart';
 import SelectInput from '../base/SelectInput';
 import CustomButton from '../base/Button';
+import StyledPaper from '../base/StyledPaper';
 
 const RevenueChart = () => {
-  const theme = useTheme();
-
   const dataset = [
     [354, 520, '1st'],
     [0, 512, '2nd'],
@@ -21,14 +20,7 @@ const RevenueChart = () => {
   }));
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: 3,
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 2,
-      }}
-    >
+    <StyledPaper padding={3} withBorder customSx={{ borderRadius: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
         <Box>
           <Typography variant="h6" fontWeight="bold" gutterBottom>
@@ -120,7 +112,7 @@ const RevenueChart = () => {
           </Grid>
         </Grid>
       </Box>
-    </Paper>
+    </StyledPaper>
   );
 };
 

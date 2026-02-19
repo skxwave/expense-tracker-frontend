@@ -1,6 +1,5 @@
 import {
   Box,
-  Paper,
   Typography,
   Button,
   Divider,
@@ -13,7 +12,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from "react-icons/fa";
 
 import ThemeSwitcher from "@/components/base/ThemeSwitcher";
-
+import StyledPaper from "@/components/base/StyledPaper";
 import LoginForm from '@/components/auth/LoginForm';
 import RegisterForm from '@/components/auth/RegisterForm';
 import { useNavigate } from 'react-router-dom';
@@ -40,14 +39,12 @@ const AuthForm = () => {
         background: theme.palette.background.default,
       }}
     >
-      <Paper
-        elevation={0}
-        sx={{
+      <StyledPaper
+        customSx={{
           width: '100%',
           maxWidth: 420,
           minHeight: 600,
           borderRadius: 3,
-          border: `1px solid ${theme.palette.divider}`,
           p: 4,
           display: 'flex',
           flexDirection: 'column',
@@ -108,7 +105,7 @@ const AuthForm = () => {
             </Link>
           </Typography>
         </Box>
-      </Paper>
+      </StyledPaper>
     </Box>
   );
 };

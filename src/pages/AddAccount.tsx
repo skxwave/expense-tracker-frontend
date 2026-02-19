@@ -1,12 +1,12 @@
-import { Box, Paper, Typography, MenuItem, useTheme } from '@mui/material';
+import { Box, Typography, MenuItem } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '@/components/base/Button';
+import StyledPaper from '@/components/base/StyledPaper';
 import InputField from '@/components/base/InputField';
 import SelectInput from '@/components/base/SelectInput';
 
 const AddAccount = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
@@ -52,14 +52,7 @@ const AddAccount = () => {
         pb: 4,
       }}
     >
-      <Paper
-        elevation={0}
-        sx={{
-          p: 4,
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: 2,
-        }}
-      >
+      <StyledPaper padding={4} withBorder>
         <Typography variant="h5" fontWeight="bold" mb={3}>
           Create New Account
         </Typography>
@@ -115,7 +108,7 @@ const AddAccount = () => {
             </CustomButton>
           </Box>
         </Box>
-      </Paper>
+      </StyledPaper>
     </Box>
   );
 };

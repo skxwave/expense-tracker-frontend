@@ -1,12 +1,12 @@
-import { Box, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import CustomButton from '@/components/base/Button';
+import StyledPaper from '@/components/base/StyledPaper';
 import InputField from '@/components/base/InputField';
 import SelectInput from '@/components/base/SelectInput';
 
 const EditAccount = () => {
-  const theme = useTheme();
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -53,14 +53,7 @@ const EditAccount = () => {
         pb: 4,
       }}
     >
-      <Paper
-        elevation={0}
-        sx={{
-          p: 4,
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: 2,
-        }}
-      >
+      <StyledPaper padding={4} withBorder>
         <Typography variant="h5" fontWeight="bold" mb={3}>
           Edit Account
         </Typography>
@@ -117,7 +110,7 @@ const EditAccount = () => {
             </CustomButton>
           </Box>
         </Box>
-      </Paper>
+      </StyledPaper>
     </Box>
   );
 };

@@ -1,12 +1,12 @@
 import {
   Box,
-  Paper,
   Typography,
   useTheme,
   LinearProgress,
 } from '@mui/material';
 import { GoGoal } from "react-icons/go";
 import CustomButton from '../base/Button';
+import StyledPaper from '../base/StyledPaper';
 
 const GoalsTab = () => {
   const theme = useTheme();
@@ -18,13 +18,11 @@ const GoalsTab = () => {
   ];
 
     return (
-      <Paper
-        elevation={0}
-        sx={{
-          p: 3,
-          height: '100%',
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: 2,
+      <StyledPaper
+        padding={3}
+        fullHeight
+        withOverflow
+        customSx={{
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
@@ -81,7 +79,7 @@ const GoalsTab = () => {
         <CustomButton isCentral isActive sx={{ mt: 1, p: 1, alignSelf: 'stretch' }}>
           View All
         </CustomButton>
-      </Paper>
+      </StyledPaper>
     );
 };
 

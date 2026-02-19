@@ -1,6 +1,7 @@
-import { Box, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { type ReactNode } from 'react';
 import CustomButton from '../base/Button';
+import StyledPaper from '../base/StyledPaper';
 import { useNavigate } from 'react-router-dom';
 
 interface AccountBoxProps {
@@ -16,15 +17,10 @@ const AccountBox = ({ accountId, name, value, icon }: AccountBoxProps) => {
   const navigate = useNavigate();
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: 3,
-        height: '100%',
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 2,
-        overflow: 'hidden',
-      }}
+    <StyledPaper
+      padding={3}
+      fullHeight
+      withOverflow
     >
       <Box
         display="flex"
@@ -75,7 +71,7 @@ const AccountBox = ({ accountId, name, value, icon }: AccountBoxProps) => {
           </Typography>
         </CustomButton>
       </Box>
-    </Paper>
+    </StyledPaper>
   );
 };
 

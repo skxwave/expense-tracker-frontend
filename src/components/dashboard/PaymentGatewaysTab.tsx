@@ -1,12 +1,12 @@
 import {
   Box,
-  Paper,
   Typography,
   useTheme,
 } from '@mui/material';
 import { ImPaypal } from "react-icons/im";
 import { TbBrandStripeFilled } from "react-icons/tb";
 import CustomButton from '../base/Button';
+import StyledPaper from '../base/StyledPaper';
 
 const PaymentGateways = () => {
   const theme = useTheme();
@@ -18,13 +18,11 @@ const PaymentGateways = () => {
   ];
 
     return (
-      <Paper
-        elevation={0}
-        sx={{
-          p: 3,
-          height: '100%',
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: 2,
+      <StyledPaper
+        padding={3}
+        fullHeight
+        withOverflow
+        customSx={{
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
@@ -77,7 +75,7 @@ const PaymentGateways = () => {
         <CustomButton isCentral isActive sx={{ mt: 1, p: 1, alignSelf: 'stretch' }}>
           View All
         </CustomButton>
-      </Paper>
+      </StyledPaper>
     );
 };
 

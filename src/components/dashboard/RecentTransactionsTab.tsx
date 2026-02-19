@@ -1,11 +1,11 @@
 import {
   Box,
   Grid,
-  Paper,
   Typography,
   useTheme,
 } from '@mui/material';
 import CustomButton from '../base/Button';
+import StyledPaper from '../base/StyledPaper';
 
 const RecentTransactions = () => {
   const theme = useTheme();
@@ -63,15 +63,11 @@ const RecentTransactions = () => {
   ];
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: 3,
-        height: '100%',
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 2,
-        overflow: 'hidden',
-      }}
+    <StyledPaper
+      padding={3}
+      fullHeight
+      withOverflow
+      customSx={{ overflow: 'hidden' }}
     >
       <Typography variant="h6" fontWeight="bold" gutterBottom>
         Recent Transactions
@@ -139,7 +135,7 @@ const RecentTransactions = () => {
       <CustomButton isCentral isActive sx={{ mt: 1, p: 1 }}>
         View All
       </CustomButton>
-    </Paper>
+    </StyledPaper>
   );
 };
 
