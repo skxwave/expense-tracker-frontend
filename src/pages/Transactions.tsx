@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Box, Divider, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Divider, Paper, Typography, Grid, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
 import CustomButton from '@/components/base/Button';
 import TransactionListItem from '@/components/transactions/TransactionListItem';
+import TransactionDetails from '@/components/transactions/TransactionDetails';
 
 const Transactions = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('All Transactions');
+  const [selectedTransaction, setSelectedTransaction] = useState<number | null>(null);
 
   const transactionTypes = ['All Transactions', 'Expenses', 'Incomes', 'Transfers'];
 
@@ -93,28 +95,48 @@ const Transactions = () => {
         ))}
       </Box>
 
-      <Paper
-        elevation={0}
-        sx={{
-          // p: 2,
-          mb: 2,
-          height: '100%',
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: 2,
-          overflow: 'hidden',
-        }}
-      >
-        {transactions.map((transaction, index) => (
-          <Box key={transaction.id}>
-            <TransactionListItem
-              icon={transaction.icon}
-              category={transaction.category}
-              amount={transaction.amount}
-            />
-            {index !== transactions.length - 1 && <Divider variant='middle' />}
-          </Box>
-        ))}
-      </Paper>
+      <Grid container spacing={2}>
+        <Grid 
+          size={{ xs: 12, sm: 12, md: 12, lg: selectedTransaction ? 8 : 12 }}
+          order={{ xs: 2, sm: 2, md: 2, lg: 1 }}
+        >
+          <Paper
+            elevation={0}
+            sx={{
+              border: `1px solid ${theme.palette.divider}`,
+              borderRadius: 2,
+              overflow: 'hidden',
+            }}
+          >
+            {transactions.map((transaction, index) => (
+              <Box 
+                key={transaction.id}
+                onClick={() => setSelectedTransaction(transaction.id)}
+                sx={{ 
+                  cursor: 'pointer',
+                  backgroundColor: selectedTransaction === transaction.id ? 'action.selected' : 'transparent',
+                }}
+              >
+                <TransactionListItem
+                  icon={transaction.icon}
+                  category={transaction.category}
+                  amount={transaction.amount}
+                />
+                {index !== transactions.length - 1 && <Divider variant='middle' />}
+              </Box>
+            ))}
+          </Paper>
+        </Grid>
+
+        {selectedTransaction && (
+          <Grid
+            size={{ xs: 12, sm: 12, md: 12, lg: 4 }}
+            order={{ xs: 1, sm: 1, md: 1, lg: 2 }}
+          >
+            <TransactionDetails onClose={() => setSelectedTransaction(null)} />
+          </Grid>
+        )}
+      </Grid>
     </Box>
   );
 }
