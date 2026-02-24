@@ -41,35 +41,38 @@ const onSubmit = async (data: RegisterFormValues) => {
     <>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <InputField 
-          label="First Name" 
-          {...register('first_name')} 
-          error={!!errors.first_name} 
-          helperText={errors.first_name?.message} 
+          label="First Name"
+          {...register('first_name')}
+          error={!!errors.first_name}
+          helperText={errors.first_name?.message}
+          sx={{ mb: 2 }}
         />
         <InputField 
-          label="Last Name" 
-          {...register('last_name')} 
-          error={!!errors.last_name} 
-          helperText={errors.last_name?.message} 
+          label="Last Name"
+          {...register('last_name')}
+          error={!!errors.last_name}
+          helperText={errors.last_name?.message}
+          sx={{ mb: 2 }}
         />
         <InputField 
-          label="Email" 
-          {...register('email')} 
-          error={!!errors.email} 
-          helperText={errors.email?.message} 
+          label="Email"
+          {...register('email')}
+          error={!!errors.email}
+          sx={{ mb: 2 }}
         />
         <InputField 
-          label="Username" 
-          {...register('username')} 
-          error={!!errors.username} 
-          helperText={errors.username?.message} 
+          label="Username"
+          {...register('username')}
+          error={!!errors.username}
+          helperText={errors.username?.message}
+          sx={{ mb: 2 }}
         />
         <InputField 
-          label="Password" 
-          type="password" 
-          {...register('password')} 
-          error={!!errors.password} 
-          helperText={errors.password?.message} 
+          label="Password"
+          type="password"
+          {...register('password')}
+          error={!!errors.password}
+          helperText={errors.password?.message}
           sx={{ mb: 3 }}
         />
         <CustomButton type="submit" disabled={loading} isCentral isActive sx={{ mb: 2 }}>

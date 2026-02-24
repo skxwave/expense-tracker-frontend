@@ -30,17 +30,18 @@ const LoginForm = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <InputField 
-          label="Username" 
-          {...register('username')} 
-          error={!!errors.username} 
-          helperText={errors.username?.message} 
+          label="Username"
+          {...register('username')}
+          error={!!errors.username}
+          helperText={errors.username?.message}
+          sx={{ mb: 2 }}
         />
         <InputField 
-          label="Password" 
-          type="password" 
-          {...register('password')} 
-          error={!!errors.password} 
-          helperText={errors.password?.message} 
+          label="Password"
+          type="password"
+          {...register('password')}
+          error={!!errors.password}
+          helperText={errors.password?.message}
           sx={{ mb: 3 }}
         />
         <CustomButton type="submit" disabled={loading} isCentral isActive sx={{ mb: 2 }}>
