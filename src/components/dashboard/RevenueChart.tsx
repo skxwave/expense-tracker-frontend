@@ -1,23 +1,17 @@
 import { Box, Typography, MenuItem, Grid } from '@mui/material';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { PieChart } from '@mui/x-charts/PieChart';
 import SelectInput from '../base/SelectInput';
 import CustomButton from '../base/Button';
 import StyledPaper from '../base/StyledPaper';
 
 const RevenueChart = () => {
-  const dataset = [
-    [354, 520, '1st'],
-    [0, 512, '2nd'],
-    [252, 225, '3rd'],
-    [522, 402, '4th'],
-    [0, 242, '5th'],
-    [0, 1020, '6th'],
-    [0, 300, '7th'],
-  ].map(([incomes, expenses, order]) => ({
-    incomes,
-    expenses,
-    order,
-  }));
+  const totalIncomes = 5251
+  const totalExpenses = 3142
+
+  const donutData = [
+    { id: 0, value: totalIncomes },
+    { id: 1, value: totalExpenses },
+  ];
 
   return (
     <StyledPaper padding={3} withBorder customSx={{ borderRadius: 2 }}>
@@ -30,36 +24,76 @@ const RevenueChart = () => {
             Revenue and expenses over the period
           </Typography>
         </Box>
-        <SelectInput defaultValue="March 2025">
-          <MenuItem value="March 2025">March 2025</MenuItem>
-          <MenuItem value="February 2025">February 2025</MenuItem>
-          <MenuItem value="January 2025">January 2025</MenuItem>
+        <SelectInput defaultValue="Last 30 days">
+          <MenuItem value="Last 30 days">Last 30 days</MenuItem>
+          <MenuItem value="Last 90 days">Last 90 days</MenuItem>
+          <MenuItem value="Last 365 days">Last 365 days</MenuItem>
         </SelectInput>
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, gap: 4 }}>
-        <Box sx={{ width: '100%', height: 300, minHeight: { xs: 250, md: 300 }}}>
-          <BarChart
-            series={[
-              { dataKey: 'incomes', label: 'Incomes', layout: 'vertical', stack: 'stack' },
-              { dataKey: 'expenses', label: 'Expenses', layout: 'vertical', stack: 'stack' },
-            ]}
-            dataset={dataset}
-            margin={{ left: 0 }}
-            borderRadius={10}
-            colors={['#818CF8', '#FFB74D']}
-          />
+        <Box sx={{ width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'center', alignItems: 'center', gap: 2 }}>
+          <Box sx={{ height: 300, minHeight: { xs: 250, md: 300 }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <PieChart
+              series={[
+                {
+                  data: donutData,
+                  innerRadius: 60,
+                  outerRadius: 120,
+                  paddingAngle: 5,
+                  cornerRadius: 5,
+                  cx: 150,
+                  cy: 150,
+                },
+              ]}
+              colors={['#818CF8', '#FFB74D']}
+              width={300}
+              height={300}
+              margin={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            />
+          </Box>
+          
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'row', md: 'column' }, gap: 2, justifyContent: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Box
+                sx={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: '50%',
+                  backgroundColor: '#818CF8',
+                  flexShrink: 0,
+                }}
+              />
+              <Typography variant="body2">
+                Incomes
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Box
+                sx={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: '50%',
+                  backgroundColor: '#FFB74D',
+                  flexShrink: 0,
+                }}
+              />
+              <Typography variant="body2">
+                Expenses
+              </Typography>
+            </Box>
+          </Box>
         </Box>
 
         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
           <Grid size={{ lg: 12, xs: 12, md: 4,  sm: 4 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Box>
-                <Typography variant="h4" fontWeight="bold">
-                  $63,489.50
+                <Typography variant="body1" fontWeight="bold" mb={1}>
+                  Total
                 </Typography>
-                <Typography variant="body2">
-                  Total Earnings
+                <Typography variant="h4" fontWeight="bold">
+                  ${(totalIncomes + totalExpenses).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </Typography>
               </Box>
             </Box>
@@ -72,15 +106,15 @@ const RevenueChart = () => {
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  backgroundColor: '#6C8EF2',
+                  backgroundColor: '#818CF8',
                 }}
               />
               <Typography variant="body2">
-                Earnings this month
+                Total Incomes
               </Typography>
             </Box>
             <Typography variant="h5" fontWeight="bold">
-              $48,820
+              ${totalIncomes.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </Typography>
           </Grid>
 
@@ -91,15 +125,15 @@ const RevenueChart = () => {
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  backgroundColor: '#4A5F7F',
+                  backgroundColor: '#FFB74D',
                 }}
               />
               <Typography variant="body2">
-                Expense this month
+                Total Expenses
               </Typography>
             </Box>
             <Typography variant="h5" fontWeight="bold">
-              $26,498
+              ${totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </Typography>
           </Grid>
 
