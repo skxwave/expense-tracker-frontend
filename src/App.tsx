@@ -10,6 +10,8 @@ import Goals from '@/pages/Goals'
 import Transactions from '@/pages/Transactions'
 import Profile from '@/pages/Profile'
 import Settings from '@/pages/Settings'
+import AddTransaction from '@/pages/AddTransaction'
+import AddGoal from '@/pages/AddGoal'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
@@ -29,7 +31,11 @@ function App() {
           <Route path="/accounts/add-account" element={<AddAccount />} />
 
           <Route path="/goals" element={<Goals />} />
+          <Route path="/goals/:id" element={<Goals />} />
+          <Route path="/goals/:id/edit" element={<Goals />} />
+          <Route path="/goals/add-goal" element={<AddGoal />} />
           <Route path="/transactions" element={<Transactions />} />
+          <Route path="/transactions/add-transaction" element={<AddTransaction />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
         </Route>

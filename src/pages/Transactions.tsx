@@ -50,7 +50,7 @@ const Transactions = () => {
           </Typography>
           <CustomButton
             isActive
-            onClick={() => navigate('add-goal')}
+            onClick={() => navigate('add-transaction')}
             sx={{
               width: { sm: 'auto' },
               py: 1,
