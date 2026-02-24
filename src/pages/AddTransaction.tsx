@@ -92,6 +92,7 @@ const AddTransaction = () => {
             value={formData.date}
             onChange={handleChange}
             required
+            InputLabelProps={{ shrink: true }}
           />
 
           <SelectInput defaultValue="Select">

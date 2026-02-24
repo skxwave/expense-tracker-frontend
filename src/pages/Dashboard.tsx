@@ -27,7 +27,7 @@ const Dashboard = () => {
         spacing={2}
       >
         {statsData.map((stat) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={stat.title}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={stat.title} sx={{ order: { xs: 2, lg: 1 } }}>
             <Paper
               elevation={0}
               sx={{
@@ -60,7 +60,7 @@ const Dashboard = () => {
         ))}
 
         {/* Revenue Chart */}
-        <Grid size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }} sx={{ order: { xs: 1, lg: 2 } }}>
           <RevenueChart />
         </Grid>
 
@@ -68,6 +68,7 @@ const Dashboard = () => {
           container
           spacing={2}
           size={{ xs: 12 }}
+          sx={{ order: 3 }}
         >
           {/* Payment Gateways */}
           <Grid size={{ xs: 12, sm: 12, lg: 4 }}>
