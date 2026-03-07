@@ -16,6 +16,7 @@ import StyledPaper from "@/components/base/StyledPaper";
 import LoginForm from '@/components/auth/LoginForm';
 import RegisterForm from '@/components/auth/RegisterForm';
 import { useNavigate } from 'react-router-dom';
+import { isTokenValid } from '@/utils/token';
 
 const AuthForm = () => {
   const theme = useTheme();
@@ -24,8 +25,11 @@ const AuthForm = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-    if (token) {
+    if (isTokenValid(token)) {
       navigate("/");
+    } else {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
     }
   }, [navigate]);
 

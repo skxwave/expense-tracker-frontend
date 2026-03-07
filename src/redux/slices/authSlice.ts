@@ -6,6 +6,7 @@ import {
 import { login as loginApi } from "@/api/auth";
 import { type LoginResponse, type LoginCredentials } from "@/types/auth";
 import { isAxiosError } from "axios";
+import { isTokenValid } from "@/utils/token";
 
 interface AuthState {
   accessToken: string | null;
@@ -19,9 +20,18 @@ const STORAGE_KEYS = {
   REFRESH: "refresh_token",
 } as const;
 
+const storedAccess = localStorage.getItem(STORAGE_KEYS.ACCESS);
+const storedRefresh = localStorage.getItem(STORAGE_KEYS.REFRESH);
+
+// Don't hydrate expired/invalid tokens into state
+if (!isTokenValid(storedAccess)) {
+  localStorage.removeItem(STORAGE_KEYS.ACCESS);
+  localStorage.removeItem(STORAGE_KEYS.REFRESH);
+}
+
 const initialState: AuthState = {
-  accessToken: localStorage.getItem(STORAGE_KEYS.ACCESS),
-  refreshToken: localStorage.getItem(STORAGE_KEYS.REFRESH),
+  accessToken: isTokenValid(storedAccess) ? storedAccess : null,
+  refreshToken: isTokenValid(storedAccess) ? storedRefresh : null,
   loading: false,
   error: null,
 };

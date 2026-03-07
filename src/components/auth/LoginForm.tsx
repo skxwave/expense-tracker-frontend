@@ -21,8 +21,8 @@ const LoginForm = () => {
     dispatch(login(data))
     .unwrap()
     .then(() => navigate("/"))
-    .catch(err => {
-      console.error("Login failed:", err);
+    .catch(() => {
+      // error is handled via state.auth.error
     });
   };
 

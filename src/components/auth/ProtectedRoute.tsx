@@ -1,11 +1,12 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAppSelector } from '@/redux/store';
+import { isTokenValid } from '@/utils/token';
 
 const ProtectedRoute = () => {
   const { accessToken } = useAppSelector((state) => state.auth);
   const location = useLocation();
 
-  if (!accessToken) {
+  if (!isTokenValid(accessToken)) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

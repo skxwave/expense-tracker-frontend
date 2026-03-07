@@ -1,16 +1,28 @@
+import { useEffect, useState } from 'react';
 import { Box, Grid, Paper, Typography, useTheme } from '@mui/material';
 import RevenueChart from '@/components/dashboard/RevenueChart';
 import PaymentGateways from '@/components/dashboard/PaymentGatewaysTab';
 import RecentTransactions from '@/components/dashboard/RecentTransactionsTab';
 import GoalsTab from '@/components/dashboard/GoalsTab';
+import { dashboard } from '@/api/transactions';
+import type { TransactionSummary } from '@/types/transactions';
+
+const formatCurrency = (value: number) =>
+  `$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 const Dashboard = () => {
   const theme = useTheme();
+  const [summary, setSummary] = useState<TransactionSummary | null>(null);
+
+  useEffect(() => {
+    dashboard().then(setSummary).catch(console.error);
+  }, []);
+
   const statsData = [
-    { title: 'Total Balance', value: '$123,123,345',},
-    { title: 'Income', value: '$8,500',},
-    { title: 'Expenses', value: '$3,245',},
-    { title: 'Savings', value: '$9,100',},
+    { title: 'Total Balance', value: summary ? formatCurrency(summary.total_balance) : '—' },
+    { title: 'Income', value: summary ? formatCurrency(summary.total_incomes) : '—' },
+    { title: 'Expenses', value: summary ? formatCurrency(summary.total_expenses) : '—' },
+    { title: 'Savings', value: '$9,100' },
   ];
 
   return (
