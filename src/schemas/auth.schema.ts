@@ -16,9 +16,13 @@ const strongPassword = z
 export const registerSchema = z.object({
   username: z.string().min(3, 'Username must be at least 3 characters'),
   password: strongPassword,
+  confirm_password: z.string(),
   first_name: z.string().min(2, 'First name is required'),
   last_name: z.string().min(2, 'Last name is required'),
   email: z.string().email('Invalid email address'),
+}).refine(data => data.password === data.confirm_password, {
+  message: 'Passwords do not match',
+  path: ['confirm_password'],
 });
 
 // Infer types directly from schemas

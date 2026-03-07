@@ -73,6 +73,14 @@ const onSubmit = async (data: RegisterFormValues) => {
           {...register('password')}
           error={!!errors.password}
           helperText={errors.password?.message}
+          sx={{ mb: 2 }}
+        />
+        <InputField 
+          label="Repeat Password"
+          type="password"
+          {...register('confirm_password')}
+          error={!!errors.confirm_password}
+          helperText={errors.confirm_password?.message}
           sx={{ mb: 3 }}
         />
         <CustomButton type="submit" disabled={loading} isCentral isActive sx={{ mb: 2 }}>
