@@ -22,7 +22,7 @@ const Dashboard = () => {
     { title: 'Total Balance', value: summary ? formatCurrency(summary.total_balance) : '—' },
     { title: 'Income', value: summary ? formatCurrency(summary.total_incomes) : '—' },
     { title: 'Expenses', value: summary ? formatCurrency(summary.total_expenses) : '—' },
-    { title: 'Savings', value: '$9,100' },
+    { title: 'Savings', value: '-' },
   ];
 
   return (

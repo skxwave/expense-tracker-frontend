@@ -3,14 +3,21 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import SelectInput from '../base/SelectInput';
 import CustomButton from '../base/Button';
 import StyledPaper from '../base/StyledPaper';
+import { useEffect, useState } from 'react';
+import type { TotalIncomesExpenses } from '@/types/transactions';
+import { total_incomes_expenses } from '@/api/transactions';
 
 const RevenueChart = () => {
-  const totalIncomes = 5251
-  const totalExpenses = 3142
+  const [total, setTotal] = useState<TotalIncomesExpenses | null>(null);
+  const [days, setDays] = useState<number>(30);
+
+  useEffect(() => {
+    total_incomes_expenses(days).then(setTotal).catch(console.error);
+  }, [days]);
 
   const donutData = [
-    { id: 0, value: totalIncomes },
-    { id: 1, value: totalExpenses },
+    { id: 0, value: total ? total.incomes : 0},
+    { id: 1, value: total ? total.expenses : 0},
   ];
 
   return (
@@ -24,10 +31,10 @@ const RevenueChart = () => {
             Revenue and expenses over the period
           </Typography>
         </Box>
-        <SelectInput defaultValue="Last 30 days">
-          <MenuItem value="Last 30 days">Last 30 days</MenuItem>
-          <MenuItem value="Last 90 days">Last 90 days</MenuItem>
-          <MenuItem value="Last 365 days">Last 365 days</MenuItem>
+        <SelectInput value={days} onChange={(e) => setDays(Number(e.target.value))}>
+          <MenuItem value={30}>Last 30 days</MenuItem>
+          <MenuItem value={90}>Last 90 days</MenuItem>
+          <MenuItem value={365}>Last 365 days</MenuItem>
         </SelectInput>
       </Box>
 
@@ -93,7 +100,7 @@ const RevenueChart = () => {
                   Total
                 </Typography>
                 <Typography variant="h4" fontWeight="bold">
-                  ${(totalIncomes + totalExpenses).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  ${total ? (total.incomes - total.expenses).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "-"}
                 </Typography>
               </Box>
             </Box>
@@ -114,7 +121,7 @@ const RevenueChart = () => {
               </Typography>
             </Box>
             <Typography variant="h5" fontWeight="bold">
-              ${totalIncomes.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              ${total ? total.incomes.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0}
             </Typography>
           </Grid>
 
@@ -133,7 +140,7 @@ const RevenueChart = () => {
               </Typography>
             </Box>
             <Typography variant="h5" fontWeight="bold">
-              ${totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              ${total ? total.expenses.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0}
             </Typography>
           </Grid>
 

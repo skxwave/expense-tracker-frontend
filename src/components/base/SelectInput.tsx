@@ -1,11 +1,11 @@
-import { Select, useTheme, type SxProps } from "@mui/material";
+import { Select, useTheme, type SelectChangeEvent, type SxProps } from "@mui/material";
 
-const SelectInput = ({ children, defaultValue, sx }: { children: React.ReactNode; defaultValue: string; sx?: SxProps }) => {
+const SelectInput = ({ children, defaultValue, value, onChange, sx }: { children: React.ReactNode; defaultValue?: string | number; value?: string | number; onChange?: (e: SelectChangeEvent<string | number>) => void; sx?: SxProps }) => {
   const theme = useTheme();
 
   return (
     <Select
-      defaultValue={defaultValue}
+      {...(value !== undefined ? { value, onChange } : { defaultValue })}
       size="small"
       sx={{
         minWidth: 150,
